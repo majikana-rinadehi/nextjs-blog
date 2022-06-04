@@ -8,6 +8,9 @@ export default function Home() {
         <Head>
           <title>{siteName}</title>
         </Head>
+        <section>
+          <p className='mt-8'>Pui pui.</p>
+        </section>
 
       </Layout>
     </div>
