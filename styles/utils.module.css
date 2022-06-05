@@ -1,3 +1,20 @@
 .borderCircle {
     border-radius: 50%;
 }
+
+.padding1px {
+    padding: 1px;
+}
+
+.headingMd {
+    margin: 5px 0;
+}
+
+.headingLg {
+    font-size: large;
+    font-weight: bold;
+}
+
+.listItem {
+    margin: 3px;
+}
