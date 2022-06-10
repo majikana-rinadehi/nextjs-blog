@@ -7,11 +7,6 @@ import Link from 'next/link'
 const name = 'Potato'
 export const siteName = 'My First Next.js App'
 
-/**
- * 
- * @param {*} param0 
- * @returns 
- */
 export default function Layout({ children, home }) {
     return (
         <div className={styles.container}>
@@ -41,19 +36,19 @@ export default function Layout({ children, home }) {
                         </Link>
                         <h2>
                             <Link href={'/'}>
-                                <a>{name}</a>
+                                <a className='font-black text-2xl'>{name}</a>
                             </Link>
                         </h2>
                     </>
                 )}
             </header>
             <main>
-                { children }
+                {children}
             </main>
             {!home && (
-                <div>
+                <div className='mt-4'>
                     <Link href={'/'}>
-                        <a>← Back to home</a>
+                        <a className='text-indigo-400 underline'>← Back to home</a>
                     </Link>
                 </div>
             )
@@ -61,5 +56,5 @@ export default function Layout({ children, home }) {
             }
 
         </div>
-    ) 
+    )
 }
