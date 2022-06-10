@@ -31,20 +31,32 @@ export async function getStaticPaths() {
 
 const Post: NextPage<Props> = ({ postData }) => {
     return (
-        <Layout>
+        <Layout home={false}>
             <Head>
                 <title>{postData.title}</title>
             </Head>
-            <article>
-                <div>{postData.title}</div>
+            <article className='mt-4'>
+                <div className='text-2xl font-bold'>{postData.title}</div>
                 <div>
                     <Date dateString={postData.date} />
                 </div>
-                <br />
-                {postData.id}
-                <br />
                 <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
             </article>
+          {/** 
+           * ↓↓↓this doesn't work 
+           * <style jsx>...<style>
+           * */}
+          <style>{`
+            ul {
+              list-style: circle;
+              margin: 16px auto;
+              padding-left: 40px;
+            }
+
+            p {
+              margin: 16px auto;
+            }
+          `}</style>
         </Layout>
     )
 }
