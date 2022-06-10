@@ -1,9 +1,11 @@
 import Layout, { siteName } from '../components/layout'
+import Date from '../components/date'
 import Head from 'next/head'
 import getSortedPostsData from '../utils/posts'
 import { NextPage, GetStaticProps } from 'next'
 import { PostsData } from '../types/data'
 import utilStyles from '../styles/utils.module.css'
+import Link from 'next/link'
 
 type Props = {
   sortedPostsData: PostsData[]
@@ -13,10 +15,10 @@ type Props = {
 // const getStaticProps:GetStaticProps<Props> =
 // `getStaticProps` must be exported separately from page
 
-export const getStaticProps:GetStaticProps<Props> = async () => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const sortedPostsData = getSortedPostsData()
   return {
-    props:{
+    props: {
       sortedPostsData
     }
   }
@@ -26,7 +28,7 @@ export const getStaticProps:GetStaticProps<Props> = async () => {
 // export const Home: ...
 // Component must be `default export`
 
-const Home: NextPage<Props> = ({sortedPostsData}) => {
+const Home: NextPage<Props> = ({ sortedPostsData }) => {
   return (
     <div className="container">
       <Layout home>
@@ -37,19 +39,21 @@ const Home: NextPage<Props> = ({sortedPostsData}) => {
           <p className='mt-8'>Pui pui.</p>
         </section>
         <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {sortedPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              {title}
-              <br />
-              {id}
-              <br />
-              {date}
-            </li>
-          ))}
-        </ul>
-      </section>
+          <h2 className={utilStyles.headingLg}>Blog</h2>
+          <ul className={utilStyles.list}>
+            {sortedPostsData.map(({ id, date, title }) => (
+              <li className={utilStyles.listItem} key={id}>
+                <Link href={`/posts/${id}`}>
+                  <a>{title}</a>
+                </Link>
+                <br />
+                <small>
+                  <Date dateString={date} />
+                </small>
+              </li>
+            ))}
+          </ul>
+        </section>
 
       </Layout>
     </div>
