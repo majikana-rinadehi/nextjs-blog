@@ -3,24 +3,33 @@ import utilStyles from '../styles/utils.module.css'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
+import { NextPage } from 'next'
 
 const name = 'Potato'
 export const siteName = 'My First Next.js App'
 
-export default function Layout({ children, home }) {
+type Props = {
+    children: any
+    home: boolean
+}
+
+/**
+ * 
+ */
+const Layout: NextPage<Props> = ({ children, home }) => {
     return (
         <div className={styles.container}>
             <Head>
                 <link ref={'/favivon.ico'}></link>
             </Head>
-            <header className={styles.header}>
+            <header className='flex flex-col items-center'>
                 {home ? (
                     <>
                         <Image
                             src={'/molcar_400x400.jpg'}
                             width={140}
                             height={140}
-                            className={utilStyles.borderCircle}
+                            className='rounded-full'
                         />
                         <h1 className='font-black text-4xl'>{name}</h1>
                     </>
@@ -31,7 +40,7 @@ export default function Layout({ children, home }) {
                                 src={'/molcar_400x400.jpg'}
                                 width={100}
                                 height={100}
-                                className={utilStyles.borderCircle}
+                                className='rounded-full'
                             />
                         </Link>
                         <h2>
@@ -52,9 +61,9 @@ export default function Layout({ children, home }) {
                     </Link>
                 </div>
             )
-
             }
-
         </div>
     )
 }
+
+export default Layout

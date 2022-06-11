@@ -4,7 +4,6 @@ import Head from 'next/head'
 import getSortedPostsData from '../utils/posts'
 import { NextPage, GetStaticProps } from 'next'
 import { PostsData } from '../types/data'
-import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 
 type Props = {
@@ -15,9 +14,14 @@ type Props = {
 // const getStaticProps:GetStaticProps<Props> =
 // `getStaticProps` must be exported separately from page
 
+/**
+ * get posts data and pass it to component
+ * @returns props generated at build time whici can be passed to `Home`
+ */
 export const getStaticProps: GetStaticProps<Props> = async () => {
     const sortedPostsData = getSortedPostsData()
     return {
+        // must be wrapped by `props`
         props: {
             sortedPostsData
         }
@@ -30,7 +34,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
 
 const Home: NextPage<Props> = ({ sortedPostsData }) => {
     return (
-        <div className="container">
+        <div>
             <Layout home>
                 <Head>
                     <title>{siteName}</title>
@@ -40,9 +44,10 @@ const Home: NextPage<Props> = ({ sortedPostsData }) => {
                 </section>
                 <section className="mt-2 p-1">
                     <h2 className=" text-lg font-bold">Blog</h2>
-                    <ul>
+                    <ul className='list-none m-0 p-0'>
+                        {/* iterate props data */}
                         {sortedPostsData.map(({ id, date, title }) => (
-                            <li className={utilStyles.listItem} key={id}>
+                            <li className="m-1" key={id}>
                                 <Link href={`/posts/${id}`}>
                                     <a className='text-indigo-500 underline'>{title}</a>
                                 </Link>
@@ -54,10 +59,10 @@ const Home: NextPage<Props> = ({ sortedPostsData }) => {
                         ))}
                     </ul>
                 </section>
-
             </Layout>
         </div>
     )
 }
 
+// component must be 'default export'
 export default Home

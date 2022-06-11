@@ -7,6 +7,10 @@ import html from 'remark-html'
 
 const postDirPath = path.join(process.cwd(), 'posts')
 
+/**
+ * get all posts from '/posts/' and return their `id`, `title`, `date`, `content`
+ * @returns PostsData array order by date ascending
+ */
 export default function getSortedPostsData(): PostsData[] {
 
     const postFilePaths = fs.readdirSync(postDirPath)
@@ -49,9 +53,15 @@ export function getAllPostsIds () {
     })
 }
 
+/**
+ * 
+ * @param id *id* of the target file in '/posts'
+ * @returns `PostsData` and parsed markdown which can be displayed in html
+ */
 export async function getPostData (id: string): Promise<PostsData & {contentHtml: string}> {
     const fullPath = path.join(postDirPath, `${id}.md`)
     const fileContents = fs.readFileSync(fullPath, 'utf-8')
+    
 
     const { data, content } = matter(fileContents)
 

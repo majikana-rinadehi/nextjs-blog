@@ -40,6 +40,7 @@ const Post: NextPage<Props> = ({ postData }) => {
                 <div>
                     <Date dateString={postData.date} />
                 </div>
+                {/* to display markdown as html (like `InnterHtml`) */}
                 <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
             </article>
           {/** 

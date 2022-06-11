@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* to display markdown collectly */
-/* @layer base {
+@layer base {
     ul {
         list-style: circle;
         margin: 16px 0;
@@ -12,4 +12,4 @@
     p {
         margin: 16px 0;
     }
-} */
+}
